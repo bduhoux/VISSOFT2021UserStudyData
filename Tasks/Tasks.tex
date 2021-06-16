@@ -1,0 +1,86 @@
+\documentclass{article}
+
+\usepackage{url}
+\usepackage{tcolorbox}
+
+\definecolor{experiment}{rgb}{0.7, 0.7, 1}
+
+% DATA
+\title{Visual inspection of a feature-based context-oriented system}
+\date{December 2020}
+\author{Kim Mens and Beno\^{i}t Duhoux}
+
+% Setting the counter to allow references to the subsections
+\setcounter{secnumdepth}{3}
+
+\begin{document}
+
+%COVER
+\maketitle
+
+%DOCUMENT
+\section{Approach of the lab sessions}
+%====================================%
+
+Since the beginning of these lab sessions, we have been exploring how to design smart or context-aware software systems using context and feature modelling. We proposed a specific development methodology to help design such systems. Then we introduced our feature-based context-oriented programming language. Nevertheless you have probably observed that developing such systems still remains complex due to the high dynamic nature of such systems and the combinatorial explosion of contexts and features. To help developers visualise which features get activated and how they adapt the system, but also to get an overview on what contexts and features are activated or not, we propose two different visualisation tools: the \textsc{Feature Visualiser} and the \textsc{Context Feature Model Visualiser}.
+
+In this lab session, we will introduce our visualisation tools to help you understand better how your system is adapted according to the contexts. After a demonstration of our visualisation tools, we will ask you to discover how to use the tools to inspect a smart \emph{e-Shop} toy example. Then you will use them again, but now on your own implemented case study.
+We will also ask you to find and explain two bugs that we had purposefully introduced in an extension of our smart \emph{e-Shop} example. Finally we will ask you your feedback on the usability and usefulness of such visualisation tools from a developer's point of view when developing a feature-based context-oriented program.
+
+\section{Using our visualisation tools}
+\label{s:running-fbcoapp}
+
+We have already explained how we can run a feature-based context-oriented application for which we can interact with a \emph{Context Simulator} command line tool to simulate at run-time changes of the surrounding environment. Now we will explain how we can use our visualisation tools.
+ 
+First, you have to launch a server with the option `\emph{-a}' by running the command \texttt{ruby server.rb -a} in the folder \texttt{tools/server}. It launches the server and opens the communication ports of all the existing tools: \textsc{Context Simulator}, \textsc{Feature Visualiser} and  \textsc{Context Feature Model Visualiser}. If you want to use only a specific tool, as previously for the \textsc{Context Simulator} command line tool, you have to use the specific option `\emph{FeatureVisualiser}' or `\emph{ContextFeatureModel}' to open the communication ports for the \textsc{Feature Visualiser} tool or the \textsc{Context Feature Model Visualiser} tool, respectively.
+
+Then, you have to run the \textsc{Context Simulator} tool in a terminal in the folder \texttt{tools/context\_simulator} or open in your browser the \url{tools/feature_visualiser/feature_visualiser.html} web application or the \url{tools/feature_model_visualiser/context_feature_model.html} web application to start the \textsc{Feature Visualiser} tool or the \textsc{Context Feature Model Visualiser} tool, respectively. 
+
+Finally you must run your application with \texttt{ruby main\_script.rb -d} in your application folder. Note that you need to specify the option `\emph{-d}' if you want to use our visualisation tools.
+
+If you need to visualise a new running application or you execute again our current system, please refresh the web application.
+
+\section{Getting started with our visualisation tools}
+
+\begin{flushright}
+\emph{This exercise will be time-boxed to 40 minutes maximum.}
+\end{flushright}
+
+As a first exercise, you have to analyse the provided smart \emph{e-Shop} system, named \emph{smart\_e-shop\_v0.3.0}, in the \emph{apps} folder of the archive \emph{RubyCOP.zip} provided during the lab session 6. The goal of this exercise is to learn how you can use our visualisation tools.
+
+Before starting to use the visualisation tools, can you draw which classes are adapted by which features and activated by which contexts? For this exercise, focus you only on the \emph{Device} context, i.e. how these contexts trigger which features and how these features adapt the system. Pay attention to the order of the activation.
+
+Once you have drawn how you think the system gets adapted, verify with the visualisation tool if your drawing was accurate. Run the server, start the \textsc{Feature Visualiser} tool and launch the application of the smart \emph{e-Shop} system.\footnote{Reminder: to allow the application to communicate with our visualisation tools, you need run the application of your system with an option `\emph{-d}'}. Analyse step-by-step how the visualisation tool displays which features adapt which classes. (Ensure you have set up the \emph{step-by-step mode} in the visualisation tool.)\\
+
+Now that you have gained a first experience with our \textsc{Feature visualiser} tool, we will ask you to do the same but with the \textsc{Context Feature Model Visualiser} tool. Start this visualisation tool, run again the application and observe it.\\
+After this exercise, refresh the visualisation tools and rerun the application. Analyse with your visualisation tools how the system is adapted by which features, which contexts or features are (de)activated when we change the device on which we run the application. \emph{Activate the \texttt{Smartphone} context and deactivate the \texttt{Desktop} context at the same time}.
+
+\section{Inspecting your own implementation}
+
+\begin{flushright}
+\emph{This exercise will be time-boxed to 20 minutes maximum.}
+\end{flushright}
+
+Inspect your implemented smart system, either your smart messenger system or your smart calculator system, using our visualisation tools to examine whether your contexts and features are well activated, but also if your features adapt the correct classes of your system. If you noticed some problems in your implemented smart system, fix it.
+
+\section{Finding bugs}
+
+We will present you two subtle issues in the implemented smart \emph{e-Shop} application, which you should be able to explain.
+To be able to understand and explain these subtle problems, you will have to use our visualisation tools to better visualise the execution behaviour of the smart system and how it behaves depending on the contexts we activate.
+
+\subsection*{Issue \#1}
+
+Upon executing the application, an end-user sees the entire catalogue in a desktop view. Assume the end-user has a limited budget and sets up his preferences to see only products having a low price. \emph{Activate the \texttt{LowBudget} context through the Context Simulator command line.} Because he has several running programs that he wants to monitor on his laptop, he wants to use the mobile version to save screen space. \emph{Activate the \texttt{Smartphone} context and deactivate the \texttt{Desktop} context simultaneously.} What do you observe? Can you explain why you have this result?
+
+\subsection*{Issue \#2}
+
+\emph{The starting point of this question is the result of the previous question. You first need to activate the \texttt{LowBudget} context. Then you must activate the \texttt{Smartphone} context and deactivate the \texttt{Desktop} context at the same time.}
+As you have probably observed, the application shows again the entire catalogue. During the time the end-user verifies if her profile is correctly updated, she receives a mail about a bonus from her manager for her excellent work. Happy, she modifies her profile to show all the products having a price less than 1000. \emph{Activate the \texttt{MediumBudget} context.} Can you explain the issue you encounter? How can you solve the problem (without upgrading the programming language and the implementation of the smart \emph{e-Shop})?
+
+\section{Collecting your feedback}
+ 
+\begin{tcolorbox}[arc=1ex, colback=experiment, colframe=experiment, left=3pt, right=3pt, top=3pt, bottom=2pt]
+After your experience on our visualisation tools, we will ask you to fill in a form to gather your feedback as developers of our programming approach to assess the usability and usefulness of them. We will give you the form by an announcement on Moodle. This form will have to be filled together with your teammate. Do not forget to identify with your unique anonymous identifier. Be the most accurate. We count on you!
+\end{tcolorbox}
+
+\end{document}
