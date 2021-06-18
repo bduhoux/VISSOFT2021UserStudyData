@@ -10,8 +10,8 @@ This repository contains the data we need to assess the usability and usefulness
 
 ## Videos
 
-* A demonstration of our running *Feature Visualiser* is available on [Youtube](https://www.youtube.com/watch?v=JuJc1f2Pmzk)
-* A demonstration of our running *Context Feature Model Visualiser* is available on [Youtube](https://www.youtube.com/watch?v=6XUrEkuvyaA) 
+* A demonstration of our running *Feature Visualiser* is available on [Youtube](https://www.youtube.com/watch?v=JuJc1f2Pmzk).
+* A demonstration of our running *Context Feature Model Visualiser* is available on [Youtube](https://www.youtube.com/watch?v=6XUrEkuvyaA).
 
 ## Authors
 
